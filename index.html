@@ -3,23 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>About Me</title>
+	<title>Personal Site</title>
 	<style>
-		:root {
-			color-scheme: light;
-			--bg: #f4efe8;
-			--bg-accent: #e9ddcf;
-			--card: rgba(255, 255, 255, 0.78);
-			--text: #1f2937;
-			--muted: #5b6472;
-			--accent: #b45309;
-			--accent-soft: #f59e0b;
-			--shadow: 0 24px 70px rgba(31, 41, 55, 0.16);
-			--radius: 28px;
-		}
-
 		* {
 			box-sizing: border-box;
+		}
+
+		:root {
+			color-scheme: light;
+			--text: #1f2937;
+			--muted: #6b7280;
+			--border: #e5e7eb;
+			--tab: #f3f4f6;
+			--tab-active: #111827;
 		}
 
 		body {
@@ -27,186 +23,155 @@
 			min-height: 100vh;
 			font-family: Arial, Helvetica, sans-serif;
 			color: var(--text);
-			background:
-				radial-gradient(circle at top left, rgba(245, 158, 11, 0.26), transparent 30%),
-				radial-gradient(circle at bottom right, rgba(180, 83, 9, 0.15), transparent 28%),
-				linear-gradient(135deg, var(--bg), var(--bg-accent));
-			display: grid;
-			place-items: center;
-			padding: 24px;
+			background: #ffffff;
 		}
 
-		.about-card {
-			width: min(100%, 980px);
-			background: var(--card);
-			backdrop-filter: blur(16px);
-			border: 1px solid rgba(255, 255, 255, 0.55);
-			border-radius: var(--radius);
-			box-shadow: var(--shadow);
-			overflow: hidden;
-			display: grid;
-			grid-template-columns: 1.1fr 0.9fr;
+		main {
+			width: min(960px, calc(100% - 32px));
+			margin: 0 auto;
+			padding: 24px 0 48px;
 		}
 
-		.content {
-			padding: clamp(28px, 5vw, 56px);
+		nav {
 			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			gap: 20px;
+			gap: 8px;
+			padding: 8px;
+			border: 1px solid var(--border);
+			border-radius: 14px;
+			background: #ffffff;
+			position: sticky;
+			top: 16px;
+			z-index: 10;
+			backdrop-filter: blur(6px);
 		}
 
-		.eyebrow {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			width: fit-content;
-			padding: 10px 14px;
-			border-radius: 999px;
-			background: rgba(180, 83, 9, 0.1);
-			color: var(--accent);
-			font-size: 0.88rem;
-			font-weight: 700;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
+		.tab {
+			appearance: none;
+			border: 0;
+			background: var(--tab);
+			color: var(--text);
+			padding: 10px 16px;
+			border-radius: 10px;
+			font: inherit;
+			font-weight: 600;
+			text-decoration: none;
+			line-height: 1;
+		}
+
+		.tab.active {
+			background: var(--tab-active);
+			color: #ffffff;
+		}
+
+		section {
+			padding: 32px 0;
+			border-bottom: 1px solid var(--border);
+		}
+
+		section:last-child {
+			border-bottom: 0;
+		}
+
+		h1,
+		h2 {
+			margin: 0;
 		}
 
 		h1 {
-			margin: 0;
-			font-size: clamp(2.3rem, 5vw, 4.4rem);
-			line-height: 0.98;
-			letter-spacing: -0.05em;
+			font-size: clamp(2rem, 5vw, 3.4rem);
+			margin-bottom: 12px;
+		}
+
+		h2 {
+			font-size: 1.4rem;
+			margin-bottom: 12px;
 		}
 
 		p {
 			margin: 0;
-			font-size: 1.05rem;
+			max-width: 65ch;
 			line-height: 1.7;
 			color: var(--muted);
-			max-width: 52ch;
 		}
 
-		.highlights {
-			display: grid;
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+		.links {
+			display: flex;
+			flex-wrap: wrap;
 			gap: 12px;
-			margin-top: 4px;
+			margin-top: 20px;
 		}
 
-		.highlight {
-			padding: 14px;
-			border-radius: 18px;
-			background: rgba(255, 255, 255, 0.72);
-			border: 1px solid rgba(180, 83, 9, 0.1);
-		}
-
-		.highlight strong {
-			display: block;
-			color: var(--text);
-			font-size: 1rem;
-			margin-bottom: 4px;
-		}
-
-		.highlight span {
-			color: var(--muted);
-			font-size: 0.94rem;
-			line-height: 1.45;
-		}
-
-		.portrait {
-			position: relative;
-			min-height: 420px;
-			display: grid;
-			place-items: center;
-			padding: 28px;
-			background:
-				linear-gradient(160deg, rgba(180, 83, 9, 0.16), rgba(245, 158, 11, 0.12)),
-				linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.08));
-		}
-
-		.portrait::before,
-		.portrait::after {
-			content: "";
-			position: absolute;
+		.link {
+			color: inherit;
+			text-decoration: none;
+			padding: 10px 14px;
+			border: 1px solid var(--border);
 			border-radius: 999px;
-			background: rgba(255, 255, 255, 0.4);
-			filter: blur(2px);
+			background: #ffffff;
 		}
 
-		.portrait::before {
-			width: 140px;
-			height: 140px;
-			top: 24px;
-			right: 26px;
+		.link:hover,
+		.tab:hover {
+			border-color: #cbd5e1;
+			background: #f9fafb;
 		}
 
-		.portrait::after {
-			width: 200px;
-			height: 200px;
-			bottom: -60px;
-			left: -40px;
-			background: rgba(245, 158, 11, 0.18);
-		}
-
-		.portrait img {
-			position: relative;
-			z-index: 1;
-			width: min(100%, 360px);
-			aspect-ratio: 1 / 1;
-			object-fit: cover;
-			border-radius: 30px;
-			border: 10px solid rgba(255, 255, 255, 0.72);
-			box-shadow: 0 18px 45px rgba(31, 41, 55, 0.18);
-		}
-
-		@media (max-width: 820px) {
-			.about-card {
-				grid-template-columns: 1fr;
+		@media (max-width: 640px) {
+			nav {
+				flex-wrap: wrap;
 			}
 
-			.portrait {
-				min-height: 340px;
-			}
-
-			.highlights {
-				grid-template-columns: 1fr;
+			.tab {
+				flex: 1 1 calc(50% - 4px);
 			}
 		}
 	</style>
 </head>
 <body>
-	<main class="about-card">
-		<section class="content" aria-labelledby="about-title">
-			<div class="eyebrow">About Me</div>
-			<h1 id="about-title">Hi, I'm Alex.</h1>
-			<p>
-				I'm a creative learner who enjoys building simple, useful websites, exploring design,
-				and turning ideas into something people can actually use.
-			</p>
-			<p>
-				When I'm not working on projects, I like music, photography, and finding new ways to make
-				everyday experiences feel a little more personal and polished.
-			</p>
-			<div class="highlights">
-				<div class="highlight">
-					<strong>Creative</strong>
-					<span>I like clean visuals, warm colors, and thoughtful details.</span>
-				</div>
-				<div class="highlight">
-					<strong>Curious</strong>
-					<span>I enjoy learning new tools and experimenting with ideas.</span>
-				</div>
-				<div class="highlight">
-					<strong>Friendly</strong>
-					<span>I value simple, honest communication and good collaboration.</span>
-				</div>
-			</div>
+	<main>
+		<nav aria-label="Primary">
+			<a class="tab active" href="#home">Home</a>
+			<a class="tab" href="#about">About</a>
+			<a class="tab" href="#skills">Skills</a>
+			<a class="tab" href="#contact">Contact</a>
+		</nav>
+
+		<section id="home">
+			<h1>Hi, I'm Teck Yee.</h1>
+			<p>Graduated from NTU with a degree in Computer Science, I am interested in all aspects of data: From loading and building data pipelines to 
+				analyzing and visualizing it in different ways.</p>
 		</section>
-		<section class="portrait" aria-label="Profile image">
-			<img
-				alt="Illustrated profile portrait"
-				src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f59e0b'/%3E%3Cstop offset='100%25' stop-color='%23b45309'/%3E%3C/linearGradient%3E%3ClinearGradient id='skin' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fde68a'/%3E%3Cstop offset='100%25' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' rx='64' fill='url(%23bg)'/%3E%3Ccircle cx='400' cy='325' r='165' fill='url(%23skin)'/%3E%3Cpath d='M250 598c32-94 108-149 150-149s118 55 150 149' fill='%23fff7ed' opacity='.95'/%3E%3Cpath d='M271 300c28-90 81-136 129-136 56 0 113 41 136 128 7 28 1 61-10 82-16-25-39-43-68-43-29 0-50 16-58 35-9-22-31-40-60-40-27 0-52 17-69 39-10-18-13-40 0-65z' fill='%231f2937' opacity='.95'/%3E%3Ccircle cx='350' cy='332' r='14' fill='%231f2937'/%3E%3Ccircle cx='452' cy='332' r='14' fill='%231f2937'/%3E%3Cpath d='M350 400c23 23 76 23 99 0' stroke='%231f2937' stroke-width='16' stroke-linecap='round' fill='none'/%3E%3Cpath d='M160 690c39-128 146-207 240-207s201 79 240 207' fill='%23fff' opacity='.18'/%3E%3C/svg%3E"
-			/>
+
+		<section id="about">
+			<h2>About Me</h2>
+			<p>Currently working as a Data Engineer, I build and maintain data pipelines with Airflow and Kafka.</p>
+		</section>
+
+		<section id="skills">
+			<h2>Skills</h2>
+			<p>Languages:</p>
+			<ul>
+				<li>Python</li>
+				<li>JavaScript</li>
+				<li>SQL</li>
+			</ul>
+			<p>Tools:</p>
+			<ul>
+				<li>Airflow</li>
+				<li>Kafka</li>
+				<li>Spark</li>
+			</ul>
+
+
+		</section>
+
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Use this section for your email, social links, or a short message.</p>
+			<div class="links">
+				<a class="link" href="mailto:you@example.com">Email</a>
+				<a class="link" href="#home">Back to top</a>
+			</div>
 		</section>
 	</main>
 </body>
